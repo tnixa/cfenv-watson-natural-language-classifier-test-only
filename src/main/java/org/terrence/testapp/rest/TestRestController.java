@@ -4,13 +4,13 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import com.ibm.watson.developer_cloud.natural_language_classifier.v1.NaturalLanguageClassifier;
-import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classification;
-import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classifier;
-import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.ClassifyOptions;
-import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.CreateClassifierOptions;
-import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.DeleteClassifierOptions;
-import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.GetClassifierOptions;
+import com.ibm.watson.natural_language_classifier.v1.NaturalLanguageClassifier;
+import com.ibm.watson.natural_language_classifier.v1.model.Classification;
+import com.ibm.watson.natural_language_classifier.v1.model.Classifier;
+import com.ibm.watson.natural_language_classifier.v1.model.ClassifyOptions;
+import com.ibm.watson.natural_language_classifier.v1.model.CreateClassifierOptions;
+import com.ibm.watson.natural_language_classifier.v1.model.DeleteClassifierOptions;
+import com.ibm.watson.natural_language_classifier.v1.model.GetClassifierOptions;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +50,7 @@ public class TestRestController {
         CreateClassifierOptions createOptions = new CreateClassifierOptions.Builder().metadata(metadataStream)
             .trainingData(trainStream).build();
 
-        Classifier classifier = naturalLanguageClassifier.createClassifier(createOptions).execute();
+        Classifier classifier = naturalLanguageClassifier.createClassifier(createOptions).execute().getResult();
         classifierId = classifier.getClassifierId();
 
         return "Classifier created";
@@ -61,7 +61,7 @@ public class TestRestController {
 
         GetClassifierOptions getOptions = new GetClassifierOptions.Builder().classifierId(classifierId).build();
 
-        Classifier classifierNew = naturalLanguageClassifier.getClassifier(getOptions).execute();
+        Classifier classifierNew = naturalLanguageClassifier.getClassifier(getOptions).execute().getResult();
 
         System.out.println("ClassifierNew status: " + classifierNew.getStatus());
 
@@ -75,7 +75,7 @@ public class TestRestController {
           ClassifyOptions classifyOptions = new ClassifyOptions.Builder().classifierId(classifierId).text(testText)
               .build();
 
-          Classification classification = naturalLanguageClassifier.classify(classifyOptions).execute();
+          Classification classification = naturalLanguageClassifier.classify(classifyOptions).execute().getResult();
 
           System.out.println(classification);
 
