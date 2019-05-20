@@ -2,7 +2,7 @@
 Project to test a Watson Natural Language Classifier service instance on IBM Cloud using Spring Boot Starter: https://github.com/watson-developer-cloud/spring-boot-starter. A simple weather classifier will be created and used to classify sample text. 
 
 Uses the CFEnv processor to set the properties from the service entry in VCAP_SERVICES.
-- https://github.com/pivotal-cf/java-cfenv
+- https://github.com/tnixa/cfenv-processor-watson-natural-language-classifier.git
 
 ## Setup
 1. You'll need ibm cloud CLI from https://cloud.ibm.com/docs/cli/reference/ibmcloud?topic=cloud-cli-install-ibmcloud-cli#install_use and bx cf installed and configured to talk to the appropriate cf org/space etc.
